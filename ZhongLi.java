@@ -2,19 +2,20 @@ package com.company;
 
 
 
-public class ZhongLi{
+public class ZhongLi extends GeoDragon{
 
     int hp = 52000;
-    int dmg = 1000;
+    int dmg = new java.util.Random().nextInt(10000);;
     int critdmgmult = 2;
-    int critPercentage = 30;
+    int critPercentage = 50;
     int crit = new java.util.Random().nextInt(100);
-
+    int gachaeffect = new java.util.Random().nextInt(8000);
     int VortexDmg = 0;
     int TendoBanshoDmg = 0;
     int GeoResoDmg = 0;
     int Spears = 0;
 
+    int heal;
 
     String Pos = "";
 
@@ -22,11 +23,11 @@ public class ZhongLi{
     String Happen = "";
 
     public int VortexVanquisher(){
-        VortexDmg = 10000 + dmg;
+        VortexDmg = 7000 + dmg + gachaeffect;
         Pos = "Vortex";
         dmg = VortexDmg;
         Happen = "Morax swings at Azhdaha";
-        if (crit < critPercentage){
+        if (crit > critPercentage){
             return dmg = dmg*critdmgmult;
         }
         else {
@@ -40,7 +41,7 @@ public class ZhongLi{
         Happen = "TENDO BANSHO!!!";
         TendoBanshoDmg = dmg + 100000;
         dmg = TendoBanshoDmg;
-        if (crit < critPercentage){
+        if (crit > critPercentage){
             return dmg = dmg*critdmgmult;
         }
         else {
@@ -62,13 +63,19 @@ public class ZhongLi{
     public int Geo(){
         Pos = "Geo";
         Happen = "Quake!";
-        GeoResoDmg = 40000;
+        GeoResoDmg = 9000;
         dmg = GeoResoDmg;
+        CopiumShield();
         if (crit < critPercentage){
             return dmg = dmg*critdmgmult;
         }
         else {
             return dmg;
         }
+    }
+    public int CopiumShield(){
+        heal = 1000 + GeoDragonDmg;
+        hp = hp+heal;
+        return hp;
     }
 }
